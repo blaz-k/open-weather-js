@@ -2,6 +2,7 @@
   <div>
     <div class="search-box">
       <input
+        class="search-bar"
         type="text"
         placeholder="Search..."
         v-model="query"
@@ -51,14 +52,45 @@ export default {
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.location {
+  font-size: 45px;
+  font-weight: 500;
+  text-align: center;
+  color: rgb(22, 3, 3);
+  text-shadow: 1px 2px rgba(0, 0, 0, 0.25);
 }
 
-body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+.date {
+  font-size: 25px;
+  font-weight: 300;
+  text-align: center;
+  font-style: italic;
+  color: rgb(22, 3, 3);
+}
+
+.weather-info {
+  text-align: center;
+  color: rgb(22, 3, 3);
+}
+
+.weather-info .temp {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 180px;
+  font-weight: 900;
+  text-shadow: 2px 4px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 17px;
+  margin: 30px 0px;
+
+  box-shadow: 10px 25px;
+}
+
+.weather-info .meteo {
+  font-size: 55px;
+  font-weight: 750;
+  font-style: italic;
+  text-shadow: 2px 6px rgba(255, 255, 255, 0.25);
 }
 </style>
 
