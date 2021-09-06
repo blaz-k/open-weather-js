@@ -1,6 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <img alt="Vue logo" src="./assets/weather.jpg" />
+    
     <CheckWeather />
   </div>
 </template>
