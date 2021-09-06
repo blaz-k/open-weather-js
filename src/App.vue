@@ -1,8 +1,8 @@
 <template>
-  <div id="app" >
-    <img alt="Vue logo" src="./assets/weather.jpg" />
-    
-    <CheckWeather />
+  <div id="app">
+    <main>
+      <CheckWeather />
+    </main>
   </div>
 </template>
 
@@ -19,14 +19,29 @@ export default {
 
 <style>
 * {
-  background-color: rgba(213, 211, 228, 0.959);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-image: url("./assets/mixed-weather.jpg");
+  background-size: cover;
+  background-position: bottom;
+  transition: 0.4s;
+}
+
+main {
+  min-height: 100vh;
+  padding: 25px;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 30px;
 }
 </style>
