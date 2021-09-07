@@ -11,15 +11,15 @@
     </div>
 
     <div class="weather" v-if="typeof weather.main != 'undefined'">
-      <div class="weather" v-if="typeof weather.main == 'undefined'">
-        <h2>Not found</h2>
-      </div>
       <div class="location">{{ weather.name }} {{ weather.sys.country }}</div>
       <div class="date">Monday, 6, September, 2021</div>
       <div class="weather-info">
         <div class="temp">{{ Math.round(weather.main.temp) }} °C</div>
         <div class="meteo">{{ weather.weather[0].main }}</div>
       </div>
+    </div>
+    <div class="weather" v-if="typeof weather.main === 'undefined'">
+      <h1 class="temp">NOT FOUND</h1>
     </div>
   </div>
 </template>
