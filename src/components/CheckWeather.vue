@@ -11,6 +11,9 @@
     </div>
 
     <div class="weather" v-if="typeof weather.main != 'undefined'">
+      <div class="weather" v-if="typeof weather.main == 'undefined'">
+        <h2>Not found</h2>
+      </div>
       <div class="location">{{ weather.name }} {{ weather.sys.country }}</div>
       <div class="date">Monday, 6, September, 2021</div>
       <div class="weather-info">
@@ -41,11 +44,10 @@ export default {
           .then((response) => {
             return response.json();
           })
-          .then(this.setResults);
+          .then((weatherData) => {
+            this.weather = weatherData;
+          });
       }
-    },
-    setResults(results) {
-      this.weather = results;
     },
   },
 };
