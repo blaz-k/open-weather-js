@@ -1,5 +1,13 @@
 <template>
   <div>
+    <ul class="nav nav-pills mb-4">
+      <li class="nav-item">
+        <button @click="celsius" class="nav-link">C°</button>
+      </li>
+      <li class="nav-item">
+        <button @click="fahrenheit" class="nav-link">F</button>
+      </li>
+    </ul>
     <div class="search-box">
       <input
         class="search-bar"
@@ -49,6 +57,28 @@ export default {
           });
       }
     },
+    fahrenheit() {
+      fetch(
+        `${this.url}weather?q=${this.query}&units=imperial&appid=${this.apiKey}`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((weatherData) => {
+          this.weather = weatherData;
+        });
+    },
+    celsius() {
+      fetch(
+        `${this.url}weather?q=${this.query}&units=metric&appid=${this.apiKey}`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((weatherData) => {
+          this.weather = weatherData;
+        });
+    },
   },
 };
 </script>
@@ -95,6 +125,3 @@ export default {
   text-shadow: 2px 6px rgba(255, 255, 255, 0.25);
 }
 </style>
-
-// API KEY 
-//api.openweathermap.org/data/2.5/weather?q={city name}&appid=61c7d12c7c82021c85f17dc82f594edb
