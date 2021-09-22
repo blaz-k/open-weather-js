@@ -2,10 +2,10 @@
   <div>
     <ul class="nav nav-pills mb-4">
       <li class="nav-item">
-        <button @click="celsius" class="nav-link">C°</button>
+        <button @click="switchUnits('metric')" class="nav-link">C°</button>
       </li>
       <li class="nav-item">
-        <button @click="fahrenheit" class="nav-link">F</button>
+        <button @click="switchUnits('imperial')" class="nav-link">F</button>
       </li>
     </ul>
     <div class="search-box">
@@ -14,25 +14,17 @@
         type="text"
         placeholder="Search..."
         v-model="query"
-        @keypress="getWeather"
+        v-on:keyup.enter="getWeather"
       />
     </div>
 
-    <div class="weather" v-if="typeof weather.main != 'undefined'">
-      <div class="location">{{ weather.name }} {{ weather.sys.country }}</div>
-      <div class="date">Monday, 6, September, 2021</div>
-      <div class="weather-info">
-        <div class="temp">{{ Math.round(weather.main.temp) }} °C</div>
-        <div class="meteo">{{ weather.weather[0].main }}</div>
-      </div>
-    </div>
-    <div class="weather" v-if="typeof weather.main === 'undefined'">
-      <h1 class="temp">NOT FOUND</h1>
-    </div>
+    <ShowWeather :weather="weather" class="show" />
   </div>
 </template>
 
 <script>
+import ShowWeather from "./ShowWeather";
+
 export default {
   name: "CheckWeather",
   data() {
@@ -41,25 +33,13 @@ export default {
       url: "https://api.openweathermap.org/data/2.5/",
       query: "",
       weather: [],
+      unit: "metric",
     };
   },
   methods: {
-    getWeather(e) {
-      if (e.key == "Enter") {
-        fetch(
-          `${this.url}weather?q=${this.query}&units=metric&appid=${this.apiKey}`
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then((weatherData) => {
-            this.weather = weatherData;
-          });
-      }
-    },
-    fahrenheit() {
+    getWeather() {
       fetch(
-        `${this.url}weather?q=${this.query}&units=imperial&appid=${this.apiKey}`
+        `${this.url}weather?q=${this.query}&units=${this.unit}&appid=${this.apiKey}`
       )
         .then((response) => {
           return response.json();
@@ -68,60 +48,19 @@ export default {
           this.weather = weatherData;
         });
     },
-    celsius() {
-      fetch(
-        `${this.url}weather?q=${this.query}&units=metric&appid=${this.apiKey}`
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((weatherData) => {
-          this.weather = weatherData;
-        });
+    switchUnits(unit) {
+      this.unit = unit;
+      this.getWeather();
     },
+  },
+  components: {
+    ShowWeather,
   },
 };
 </script>
 
 <style scoped>
-.location {
-  font-size: 45px;
-  font-weight: 500;
-  text-align: center;
-  color: rgb(22, 3, 3);
-  text-shadow: 1px 2px rgba(0, 0, 0, 0.25);
-}
-
-.date {
-  font-size: 25px;
-  font-weight: 300;
-  text-align: center;
-  font-style: italic;
-  color: rgb(22, 3, 3);
-}
-
-.weather-info {
-  text-align: center;
-  color: rgb(22, 3, 3);
-}
-
-.weather-info .temp {
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 180px;
-  font-weight: 900;
-  text-shadow: 2px 4px;
-  background-color: rgba(255, 255, 255, 0.25);
-  border-radius: 17px;
-  margin: 30px 0px;
-
-  box-shadow: 10px 25px;
-}
-
-.weather-info .meteo {
-  font-size: 55px;
-  font-weight: 750;
-  font-style: italic;
-  text-shadow: 2px 6px rgba(255, 255, 255, 0.25);
+.show {
+  width: 500px;
 }
 </style>
