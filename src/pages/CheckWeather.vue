@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link to="/about"><a class="btn btn-success">About</a></router-link>
     <ul class="nav nav-pills mb-4">
       <li class="nav-item">
         <button @click="switchUnits('metric')" class="nav-link">C°</button>
@@ -18,15 +19,15 @@
       />
     </div>
 
-    <ShowWeather :weather="weather" class="show" />
+    <ShowWeather :weather="weather" />
   </div>
 </template>
 
 <script>
-import ShowWeather from "./ShowWeather";
+import ShowWeather from "../components/ShowWeather";
 
 export default {
-  name: "CheckWeather",
+  name: "ther",
   data() {
     return {
       apiKey: "61c7d12c7c82021c85f17dc82f594edb",
@@ -60,7 +61,4 @@ export default {
 </script>
 
 <style scoped>
-.show {
-  width: 500px;
-}
 </style>
